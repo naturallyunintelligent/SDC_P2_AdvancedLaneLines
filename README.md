@@ -39,7 +39,7 @@ each successful chessboard detection.
 
 I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function.
 
-
+Before:
 
 [//]: #	"Image References"
 
@@ -48,6 +48,10 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 [image1]: ./camera_cal/calibration1.jpg	"Before"
 
  ![alt text][image1]
+
+
+
+After:
 
 [//]: #	"Image References"
 
@@ -60,12 +64,16 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 This distortion correction is applied to the test
 images using the `cv2.undistort()` function, here is an example result:
 
+Original Example:
+
 [//]: #	"Image References"
 [image3]: ./test_images/test1.jpg "Original Example"
 
 ![alt text][image3]
 
 
+
+Undistorted Example:
 
 [//]: #	"Image References"
 [image4]: ./writeup_images/test1_undist.jpg	"Undistorted Example"
@@ -103,20 +111,24 @@ The pipeline is in code cells 4 - 11, which are all titled _Pipeline Function X_
 
     * The `combined_binary` image is formed by stacking the two results. Here is an example:
 
+      Combined Binary:
+
       [//]: #	"Image References"
-      [image6]: ./writeup_images/test1_combinedbinary.jpg "Colour Binary"
+      [image6]: ./writeup_images/test1_combinedbinary.jpg "Combined Binary"
 
       ![alt text][image6]
 
       
 
-    * NB:  It can be helpful to look at a combined colour binary, showing the pixels from each of the two thresholding processes, to help visualise the results whilst choosing the threshold values:
+    * NB:  It can be helpful to look at a combined colour "binary", showing the pixels from each of the two thresholding processes, to help visualise the results whilst choosing the threshold values:
 
-      [//]: #	"Image References"
+      Colour "Binary":
+      
+    [//]: #	"Image References"
       [image7]: ./writeup_images/test1_colourbinary.jpg "Colour Binary"
 
       ![alt text][image7]
-
+      
       
 
 3. Has a perspective transform been applied to rectify the image?
@@ -125,12 +137,16 @@ The pipeline is in code cells 4 - 11, which are all titled _Pipeline Function X_
 
     The perspective transform was verified by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image. You can see this in action with a straight road:
 
+    Road with Straight Lines:
+
     [//]: #	"Image References"
     [image8]: ./writeup_images/straight_lines2_undist.jpg "Road with Straight Lines"
 
     ![alt text][image8]
 
     
+
+    Detected Lines Warped to Bird's Eye View:
 
     [//]: #	"Image References"
     [image9]: ./writeup_images/straight_lines2_warped.jpg "Detected Lines Warped to Bird's Eye View"
@@ -151,6 +167,8 @@ The pipeline is in code cells 4 - 11, which are all titled _Pipeline Function X_
 
     the decision is made as to whether this is the first image of the video, so that a sliding windows approach is used to identify the lane lines.
 
+    Sliding Windows Approach:
+
     [//]: #	"Image References"
     [image10]: ./writeup_images/test6_undist_wLane_binwarp.jpg "Sliding Windows Approach"
 
@@ -162,10 +180,12 @@ The pipeline is in code cells 4 - 11, which are all titled _Pipeline Function X_
 
     
 
-5. The polynomials are then warped back onto the image, using a poolyfill function for a more aesthetically pleasing "lane" visualisation:
+5. The polynomials are then warped back onto the image, (and for the final output a polyfill function is used for a more aesthetically pleasing "lane" visualisation).
+
+    Detected Lines Warped back to Perspective View:
 
     [//]: #	"Image References"
-    [image11]: ./writeup_images/test6_undist_wLane.jpg "Detected Lines Warped to Bird's Eye View"
+    [image11]: ./writeup_images/test6_undist_wLane.jpg "Detected Lines Warped back to Perspective View"
 
     ![alt text][image11]
 
@@ -188,7 +208,7 @@ The pipeline is in code cells 4 - 11, which are all titled _Pipeline Function X_
 
 __Pipeline (video)__
 1. Does the pipeline established with the test images work to process the video?
-  It sure does! Here's a link to my video result:
+    It sure does! Here's a link to my video result:
 
   ./output_images/challengeaccepted.mp4
 
@@ -222,57 +242,7 @@ Potential shortcomings, failure cases and future improvements:
 
 * I have written this as a function based pipeline. Speaking to a colleague who is also studying this course, he chose a class based approach, and I realised I don't fully understand the advantages of this, so will go away and read up about classes and discuss with him further.
 * The hardcoded perspective transform could be improved by using some detection techniques to identify the horizon and vanishing point etc 
-* Whilst the pipeline processes the video, it does not perform particularly well, and shows shortcomings on both the challenge video and even more so on the harder challenge video.
+* The pipeline seems to function reasonably well on the images. However, whilst the pipeline successfully processes the video, it does not perform particularly well, and shows some shortcomings on both the challenge video and even more so on the harder challenge video:
+  * Road surface changes, shadows and lighting all cause considerable issues. This pipeline is very rudimentary and would need considerable improvement if it was to be used to actually successfully identify a lane.
 
-
-
-
-
-
-
-
-
-
-
-Original README intro:
-
-
-## Advanced Lane Finding
-[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
-![Lanes Image](./examples/example_output.jpg)
-
-In this project, your goal is to write a software pipeline to identify the lane boundaries in a video, but the main output or product we want you to create is a detailed writeup of the project.  Check out the [writeup template](https://github.com/udacity/CarND-Advanced-Lane-Lines/blob/master/writeup_template.md) for this project and use it as a starting point for creating your own writeup.  
-
-Creating a great writeup:
----
-A great writeup should include the rubric points as well as your description of how you addressed each point.  You should include a detailed description of the code used in each step (with line-number references and code snippets where necessary), and links to other supporting documents or external references.  You should include images in your writeup to demonstrate how your code works with examples.  
-
-All that said, please be concise!  We're not looking for you to write a book here, just a brief description of how you passed each rubric point, and references to the relevant code :). 
-
-You're not required to use markdown for your writeup.  If you use another method please just submit a pdf of your writeup.
-
-The Project
----
-
-The goals / steps of this project are the following:
-
-* Compute the camera calibration matrix and distortion coefficients given a set of chessboard images.
-* Apply a distortion correction to raw images.
-* Use color transforms, gradients, etc., to create a thresholded binary image.
-* Apply a perspective transform to rectify binary image ("birds-eye view").
-* Detect lane pixels and fit to find the lane boundary.
-* Determine the curvature of the lane and vehicle position with respect to center.
-* Warp the detected lane boundaries back onto the original image.
-* Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
-
-The images for camera calibration are stored in the folder called `camera_cal`.  The images in `test_images` are for testing your pipeline on single frames.  If you want to extract more test images from the videos, you can simply use an image writing method like `cv2.imwrite()`, i.e., you can read the video in frame by frame as usual, and for frames you want to save for later you can write to an image file.  
-
-To help the reviewer examine your work, please save examples of the output from each stage of your pipeline in the folder called `output_images`, and include a description in your writeup for the project of what each image shows.    The video called `project_video.mp4` is the video your pipeline should work well on.  
-
-The `challenge_video.mp4` video is an extra (and optional) challenge for you if you want to test your pipeline under somewhat trickier conditions.  The `harder_challenge.mp4` video is another optional challenge and is brutal!
-
-If you're feeling ambitious (again, totally optional though), don't stop there!  We encourage you to go out and take video of your own, calibrate your camera and show us how you would implement this project from scratch!
-
-## How to write a README
-A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
 
