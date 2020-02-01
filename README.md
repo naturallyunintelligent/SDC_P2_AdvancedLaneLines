@@ -2,9 +2,9 @@
 Naturally Unintelligent Writeup
 
 
-#Advanced Lane Finding Project
+# Advanced Lane Finding Project
 
-__The goals / steps of this project are the following:__
+__The steps of this project are:__
  - Compute the camera calibration matrix and distortion coefficients given a set of chessboard images.
  - Apply a distortion correction to raw images.
  - Use color transforms, gradients, etc., to create a thresholded binary image.
@@ -19,21 +19,26 @@ __Rubric Points__
 Camera Calibration
 1. Have the camera matrix and distortion coefficients been computed correctly and
 checked on one of the calibration images as a test?
-The code for this step is contained in the first code cell of the IPython notebook (or in lines # through # of the
-file called some_file.py ).
+
+The code for this step is contained in the second code cell of the P2.ipynb notebook 
+
 I start by preparing "object points", which will be the (x, y, z) coordinates of the chessboard corners in the
 world. Here I am assuming the chessboard is fixed on the (x, y) plane at z=0, such that the object points are
 the same for each calibration image. Thus, objp is just a replicated array of coordinates, and objpoints
 will be appended with a copy of it every time I successfully detect all chessboard corners in a test image.
 imgpoints will be appended with the (x, y) pixel position of each of the corners in the image plane with
-each successful chessboard detection.I then used the output objpoints and imgpoints to compute the camera calibration and distortion
-coefficients using the cv2.calibrateCamera() function. I applied this distortion correction to the test
+each successful chessboard detection.I then used the output objpoints and imgpoints to compute the camera calibration and distortion coefficients using the cv2.calibrateCamera() function. I applied this distortion correction to the test
 image using the cv2.undistort() function and obtained this result:
+
 
 __Pipeline (single images)__
 1. Has the distortion correction been correctly applied to each image?
 To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this
 one:<br>
+
+[image1]: ./test_images/test1.jpg "Original Example"
+[image2]: ./writeup_images/test1_undist.jpg "Undistorted Example"
+
 2. Has a binary image been created using color transforms, gradients or other methods?
 Oooh, binary image... you mean like this one? (note: this is not from one of the test images)
 3. Has a perspective transform been applied to rectify the image?
@@ -74,6 +79,8 @@ the pipeline, techniques used, areas where improvements could be made?
 You're reading it!
 
 __Discussion__
+
+
 Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might
 fail and how I might improve it if I were going to pursue this project further.
 
@@ -83,6 +90,7 @@ Spent a lot of time getting imwrite to work - not sure of route cause of this, t
 
 Potential shortcomings, failure cases and future improvements:
 I have written this as a function based pipeline. Speaking to a colleague who is also studying this course, he chose a class based approach, and I realised I don't fully understand the advantages of this, so will go away and read up about classes and discuss with him further.
+
 
 
 
